@@ -1,0 +1,25 @@
+node_modules/
+lib/
+.pylibs/
+.pip-tmp/
+.pnpm-store/
+
+# 本机其他 agent 工具的目录，不属于插件源码
+.agents/
+.claude/
+.codebuddy/
+.codex/
+.dsh/
+.workbuddy/
+.zcode/
+
+# 本机运行产物与可再生成的调查文件
+session-log*/
+asar-index.json
+asar-listing.txt
+
+# >>> Comet managed project state >>>
+!/.comet/
+/.comet/*
+!/.comet/config.yaml
+# <<< Comet managed project state <<<

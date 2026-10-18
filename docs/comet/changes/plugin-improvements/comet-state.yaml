@@ -1,0 +1,90 @@
+schema: comet.native.v4
+name: plugin-improvements
+language: zh-CN
+phase: build
+status: active
+state_version: 3
+brief: brief.md
+document_constraints_version: 3
+shape_confirmation_hash: d69b44c1e1dc977384b06d770f1b27a1717a8eabce721cd907c96ff077c4b525
+spec_changes:
+  - capability: tradingagents-teams
+    operation: create
+    source: specs/tradingagents-teams/spec.md
+workspace:
+  isolation: current
+  change_branch: main
+  target_branch: main
+  finish: null
+loop:
+  stage: building
+  goal_cycle: 1
+  iteration: 1
+  attempt: 0
+  retry_epoch: 0
+  failed_iteration_count: 0
+  no_progress_count: 0
+  execution_failure_count: 0
+  previous_unresolved_ids: []
+  next_action: submit-builder-candidate
+acceptance:
+  - id: A1
+    source: brief.md
+    text: 仓库只含项目文件：`git status --porcelain` 与 `pnpm pack` 都不出现
+      `asar-index.json`、`genai-index.mjs`、`dsh-tools-index.js`、`jobs-local.js`、`preset-registry.js`、`schema.js`、`definition.js`、`presentation.js`、`types.js`、`asar-listing.txt`、`*.clobber-bak`、`session-log`
+      任一路径。
+    result: pending
+    reason: null
+  - id: A2
+    source: brief.md
+    text: 打包产物中的文档是本插件文档：`pnpm pack` 产物内 `README.zh.md` 首行是本插件标题、正文含能力与安装说明且不再出现
+      `dsh-jobs-local`；两种语言的 README 都给出 npm、GitHub Release tarball、本地 link
+      三种安装方式与重启步骤。
+    result: pending
+    reason: null
+  - id: A3
+    source: brief.md
+    text: "命名三方一致且为选定集合：`package.json` 的 `name` 为
+      `dsh-tradingagents-teams`，`cordis.patch.yml` 的 insert 为 `id:
+      tradingagents-teams` / `name: dsh-tradingagents-teams`，`src/index.ts` 默认导出
+      `name` 为 `tradingagents-teams`，旧名不再作为包名或入口名出现。"
+    result: pending
+    reason: null
+  - id: A4
+    source: brief.md
+    text: 元数据与 peer 声明齐全：`repository.url`、`homepage`、`bugs.url`
+      非空；`peerDependencies` 覆盖 `inject` 六个服务的宿主包
+      `@deepseek-ai/dsh-agent-presets`、`@deepseek-ai/dsh-tools`、`@deepseek-ai/dsh-experimental-agent-team`、`@deepseek-ai/dsh-jobs`、`@deepseek-ai/dsh-fs`、`@deepseek-ai/dsh-credentials`，版本范围同时覆盖
+      0.1.7-rc.2 与 0.2.1-rc.2 两个宿主。
+    result: pending
+    reason: null
+  - id: A5
+    source: brief.md
+    text: 被移除文件可从备份恢复：`D:\deepseek-harness\dsh\.scratch\plugin-improvements-backup\`
+      中能找到每个被移除文件与目录的同名副本。
+    result: pending
+    reason: null
+  - id: A6
+    source: brief.md
+    text: 本机 desktop profile 完成命名迁移：`~/.dsh/profiles/desktop/package.json` 的依赖 key 与
+      `cordis.patch.yml` 的 insert 名均为新命名，`tradingagents-dsh` 不再出现。
+    result: pending
+    reason: null
+builder_handoff: null
+blockers: []
+verification: null
+history: []
+history_overflow:
+  dropped_entries: 0
+  first_dropped_at: null
+  last_dropped_at: null
+  outcome_counts:
+    pass: 0
+    fail: 0
+    blocked: 0
+    execution-error: 0
+    recovery: 0
+verification_result: pending
+verification_report: null
+archived: false
+created_at: 2026-10-18T05:56:30.472Z

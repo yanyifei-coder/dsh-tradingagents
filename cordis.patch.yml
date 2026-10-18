@@ -1,0 +1,17 @@
+# tradingagents-teams bundle patch.
+# Rebuilt 2026-10-11: the original file was clobbered with a copy of the
+# dsh-base bundle patch (same incident that wrecked package.json), which made
+# cordis resolve "@deepseek-ai/dsh-tool-jobs" back to this plugin and register
+# its agent presets twice ("Duplicate agent preset: ta-analyst-market").
+# This patch now carries ONLY the plugin's own row; all config fields fall
+# back to zod defaults (selectedAnalysts, decisionLanguage, ...).
+#
+# 2026-10-18: the entry moved to the plugin's own identity — package name
+# `dsh-tradingagents-teams` and entry id `tradingagents-teams` — so that it can
+# coexist with the same-named community plugin (package `dsh-tradingagents`,
+# entry id `tradingagents`) inside one profile.
+
+- insert:
+    - id: tradingagents-teams
+      name: dsh-tradingagents-teams
+      disabled: false

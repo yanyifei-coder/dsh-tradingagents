@@ -1,0 +1,63 @@
+{
+  "name": "dsh-tradingagents-teams",
+  "version": "0.1.0",
+  "description": "TradingAgents multi-analyst stock research plugin for DeepSeek Harness — orchestrates DSH Agent Teams (analysts → bull/bear debate → trader → risk review → portfolio manager) with real market data tools.",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "tradingagents",
+    "multi-agent",
+    "stock-research"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yanyifei-coder/dsh-tradingagents.git"
+  },
+  "homepage": "https://github.com/yanyifei-coder/dsh-tradingagents#readme",
+  "bugs": {
+    "url": "https://github.com/yanyifei-coder/dsh-tradingagents/issues"
+  },
+  "files": [
+    "lib",
+    "bridge",
+    "cordis.patch.yml",
+    "README.md",
+    "README.zh.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --format=esm --outfile=lib/index.js --charset=utf8 --log-level=warning",
+    "prepublishOnly": "pnpm run build",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "node --test test/indicators.test.ts test/ids.test.ts test/types.test.ts test/memory.test.ts test/tencent.test.ts test/bridge.test.ts test/config.test.ts test/orchestrator-e2e.test.ts"
+  },
+  "dependencies": {
+    "zod": "^3.24.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-agent-presets": ">=0.1.7-rc.2 <0.3.0-0",
+    "@deepseek-ai/dsh-tools": ">=0.1.7-rc.2 <0.3.0-0",
+    "@deepseek-ai/dsh-experimental-agent-team": ">=0.1.7-rc.2 <0.3.0-0",
+    "@deepseek-ai/dsh-jobs": ">=0.1.7-rc.2 <0.3.0-0",
+    "@deepseek-ai/dsh-fs": ">=0.1.7-rc.2 <0.3.0-0",
+    "@deepseek-ai/dsh-credentials": ">=0.1.7-rc.2 <0.3.0-0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.6.0"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "engines": {
+    "node": "^22.19 || >=24"
+  }
+}
