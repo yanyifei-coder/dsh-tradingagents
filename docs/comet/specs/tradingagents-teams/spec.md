@@ -15,7 +15,7 @@
 
 ## 服务依赖声明
 
-`peerDependencies` 覆盖 `src/index.ts` 的 `inject: ['agentPresets', 'tools', 'agentTeams', 'jobs', 'fs', 'credentials']` 对应宿主包 `@deepseek-ai/dsh-agent-presets`、`@deepseek-ai/dsh-tools`、`@deepseek-ai/dsh-experimental-agent-team`、`@deepseek-ai/dsh-jobs`、`@deepseek-ai/dsh-fs`、`@deepseek-ai/dsh-credentials`，版本范围同时覆盖 0.1.7-rc.2 与 0.2.1-rc.2 两个宿主。
+`peerDependencies` 覆盖 `src/index.ts` 的 `inject: ['agentPresets', 'tools', 'agentTeams', 'jobs', 'fs', 'credentials']` 对应宿主包 `@deepseek-ai/dsh-agent-preset-registry`、`@deepseek-ai/dsh-tools`、`@deepseek-ai/dsh-experimental-agent-team`、`@deepseek-ai/dsh-jobs`、`@deepseek-ai/dsh-fs`、`@deepseek-ai/dsh-credentials`，版本范围同时覆盖 0.1.7-rc.2 与 0.2.1-rc.2 两个宿主。其中 `agentPresets` 的提供方由 `packages/preset/agent-preset-registry/src/index.ts` 的 `super(ctx, 'agentPresets')` 证实；`packages/preset/agent-presets` 目录不存在 `package.json`，是旧名残留。
 
 ## 发布产物
 
