@@ -40,7 +40,7 @@
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "^4.0.1",
-    "@deepseek-ai/dsh-agent-presets": ">=0.1.7-rc.2 <0.3.0-0",
+    "@deepseek-ai/dsh-agent-preset-registry": ">=0.1.7-rc.2 <0.3.0-0",
     "@deepseek-ai/dsh-tools": ">=0.1.7-rc.2 <0.3.0-0",
     "@deepseek-ai/dsh-experimental-agent-team": ">=0.1.7-rc.2 <0.3.0-0",
     "@deepseek-ai/dsh-jobs": ">=0.1.7-rc.2 <0.3.0-0",

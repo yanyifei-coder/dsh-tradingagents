@@ -185,7 +185,7 @@ HTTP 直接走 host Node `fetch`（JSON API、确定性超时）；若部署要�
 5. **当前阻塞**：宿主进程的 ESM 模块缓存持有首次安装的旧 bundle——`set_plugin` 禁用/启用只会重跑内存中的旧 apply。**需重启 DeepSeek Harness 应用**让新 bundle 加载；重启后预期 11 预设 + 6 工具注册（`start_trading_analysis` / `ta_get_market_data` / `ta_get_fundamentals` / `ta_get_news` / `ta_get_sentiment` / `ta_run_status`）。
 6. **遗留 VERIFY**：宿主 cordis 版本（本地测试用开源 cordis 4.0-rc.10）；`config` 注入是否直达 apply 第二参；事件总线（emit 目前为 console）。这些在重启后的真实加载中逐一暴露、逐一修。
 7. **重启后第一轮真实暴露（已修，待二次重启生效）**：
-   - profile 补丁条目被 set_plugin 重写时丢失 `name` 字段 → loader 无法解析模块 → GUI 启动告警（"显示异常"根因）。已手工补回 `name: tradingagents-dsh`。
+   - profile 补丁条目被 set_plugin 重写时丢失 `name` 字段 → loader 无法解析模块 → GUI 启动告警（"显示异常"根因）。已手工补回 `name` 字段（该入口随后统一为 `dsh-tradingagents-teams`）。
    - inject 修复生效（守卫错误消失，错误推进到工具注册）→ 暴露真实 `ToolDefinition` 契约：**必须声明 `output { schema, render, presentationMeta? }`**；`parameters` 是**裸 JSON Schema**（非 zod！）；execute 返回值即候选 value、宿主按 output.schema 校验、render(args, value) 产出 UI 投影。已把 6 个工具全部迁移到该契约（统一返回 JSON 字符串 + `output.schema = { type:'string' }` + 原样投影 render），typecheck/build 全绿。
    - 宿主位置实证：真实安装在 `D:\Users\yanyi\AppData\Local\Programs\DeepSeek Harness\`（非系统提示声称的 C 盘路径），核心代码在 `resources/app.asar`；asar 内含全部 `@deepseek-ai/*` 包与源码，自研提取器（scripts/asar.mjs）可读取——`dsh-types.ts` 的 VERIFY 校正从此有权威依据。
    - `@deepseek-ai/dsh-tools` 在 npm 存在（0.0.1-rc.1）但其依赖 `@deepseek-ai/dsh-type-meta` 未发布，无法直接安装——asar 提取是唯一路径。
@@ -241,10 +241,10 @@ A 股财务/宏观等广度数据走**可选 AkShare 桥**（`dataBridge: { enab
 
 ## 11. 落地步骤（放进真实 DSH 开发仓库）
 
-1. 把 `tradingagents-dsh/` 放进 DSH 工作区（monorepo `packages/` 下或独立 workspace），`pnpm install`；peer 依赖 `@deepseek-ai/cordis` 对齐仓库内版本。
+1. 把本插件仓库放进 DSH 工作区（monorepo `packages/` 下或独立 workspace），`pnpm install`；peer 依赖 `@deepseek-ai/cordis` 对齐仓库内版本。
 2. 用仓库内现有插件的 `cordis.yml`（建议对照 `@deepseek-ai/dsh-jobs-local` 与 `dsh-user-questions`）校正本包的 `cordis.yml.example`，改名为 `cordis.yml`。
 3. 对照真实 `.d.ts` 逐条校正 `src/dsh-types.ts` —— 所有对 DSH 类型/字段名的假设都集中在该文件，并带 `VERIFY` 标记；然后 `pnpm run typecheck`。
-4. 在 profile 的 cordis.yml include 本插件；用 Config inspect provider 确认出现 `include:tradingagents` 条目。
+4. 在 profile 的 cordis.yml include 本插件；用 Config inspect provider 确认出现 `include:tradingagents-teams` 条目。
 5. 测试矩阵：单测（状态机纯函数、指标计算）、keyless recorded-session 快照（模型可见输出）、真实 e2e（`DEEPSEEK_API_KEY`）。遵守仓库门禁：`typecheck`/`lint`/`duplication`/`doc-sync`/`test:coverage`。
 
 ## 12. 已知风险

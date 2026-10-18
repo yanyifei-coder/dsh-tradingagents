@@ -1,4 +1,4 @@
-# tradingagents-dsh 接入示例 —— 全部为注释；落地时按仓库真实插件校正字段后取消注释。
+# dsh-tradingagents-teams 接入示例 —— 全部为注释；落地时按仓库真实插件校正字段后取消注释。
 #
 # DSH 有 verify-cordis-config 门禁：profile cordis.yml 中出现的裸插件必须登记在
 # resolver manifest 的 dependencies 里。字段结构务必对照仓库内现有插件
@@ -7,7 +7,7 @@
 # 1) profile cordis.yml 的 include（形态对应 Config inspect 目录里的 include:<patchId> 条目）：
 #
 # include:
-#   - tradingagents-dsh:
+#   - dsh-tradingagents-teams:
 #       config:
 #         selectedAnalysts: [market, news, sentiment, fundamentals]
 #         maxDebateRounds: 1

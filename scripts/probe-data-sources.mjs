@@ -7,7 +7,7 @@
  * 探针结论用于设计校准（DESIGN §7/§12），不是运行时代码。
  */
 
-const PLUGIN_UA = 'tradingagents-dsh/0.1.0 (DeepSeek Harness plugin; research use)'
+const PLUGIN_UA = 'dsh-tradingagents-teams/0.1.0 (DeepSeek Harness plugin; research use)'
 const BROWSER_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36'
 const TIMEOUT_MS = 15_000
 
@@ -141,7 +141,7 @@ async function probeSentiment(ticker) {
   }
 }
 
-console.log(`=== tradingagents-dsh 数据源探针 @ ${new Date().toISOString()} ===`)
+console.log(`=== tradingagents-teams 数据源探针 @ ${new Date().toISOString()} ===`)
 await probeEastmoney('105.NVDA', '美股 NVDA')
 await probeEastmoney('116.00700', '港股 00700')
 await probeEastmoney('1.600519', 'A股 600519')
